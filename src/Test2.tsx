@@ -5,7 +5,10 @@ export function Test2(){
     const [newItem, setNewItem] = useState('');
 
     function addToList() {
-        setList(state => [...state, newItem])
+        //Call API simulation
+        setTimeout(() => {
+            setList(state => [...state, newItem])
+        }, 500)
     }
 
     return(

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Test2} from './Test2';
 
@@ -12,8 +12,8 @@ describe('Test2 Component', () => {
         expect(getByText('Mayk')).toBeInTheDocument();
     });
 
-    it('should be able to add new item to the list', () => {
-        const { getByText, debug, getByPlaceholderText } = render(<Test2 />)
+    it('should be able to add new item to the list', async () => {
+        const { getByText, debug, getByPlaceholderText, findByText } = render(<Test2 />)
 
         const inputElement = getByPlaceholderText('New Name')
         //Fire Event permite disparar ações dentro da minha interface da aplicação
@@ -23,7 +23,15 @@ describe('Test2 Component', () => {
         userEvent.type(inputElement, 'New name')
         userEvent.click(addButton);
 
-        expect(getByText('New name')).toBeInTheDocument();
+        // expect(getByText('New name')).toBeInTheDocument();
+
+        //In this case , with api call, we use the findByText
+        expect(await findByText('New name')).toBeInTheDocument();
+        //We can to do 
+        // await waitFor(async () => {
+        //     expect(getByText('New name')).toBeInTheDocument()
+        // })
+
         // debug()
     });
 
