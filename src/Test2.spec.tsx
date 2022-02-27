@@ -13,13 +13,16 @@ describe('Test2 Component', () => {
     });
 
     it('should be able to add new item to the list', () => {
-        const { getByText, debug } = render(<Test2 />)
+        const { getByText, debug, getByPlaceholderText } = render(<Test2 />)
 
+        const inputElement = getByPlaceholderText('New Name')
         //Fire Event permite disparar ações dentro da minha interface da aplicação
         const addButton = getByText('Adicionar');
         // debug()
 
+        userEvent.type(inputElement, 'New name')
         userEvent.click(addButton);
+
         expect(getByText('New name')).toBeInTheDocument();
         // debug()
     });

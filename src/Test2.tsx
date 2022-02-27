@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 
 export function Test2(){
     const [list, setList] = useState(['Diego', 'Gabriel', 'Mayk']);
+    const [newItem, setNewItem] = useState('');
 
     function addToList() {
-        setList(state => [...state, 'New name'])
+        setList(state => [...state, newItem])
     }
 
     return(
         <div>
+            <input 
+                type="text" 
+                value={newItem} 
+                onChange={e => setNewItem(e.target.value)} 
+                placeholder="New Name"
+            />
             <button onClick={addToList}>Adicionar</button>
             <ul>
                 {list.map(item => <li key={item}>{item}</li>)}
